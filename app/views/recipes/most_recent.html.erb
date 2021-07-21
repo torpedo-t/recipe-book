@@ -1,0 +1,16 @@
+<ul class="most-recent-recipes">
+<% @recent_recipes.each do |recipe| %>
+    <li class="recipe-name">
+    <%= link_to "#{recipe.name}", user_recipe_path(recipe.user, recipe) %>
+    </li>
+    <li class="recipe-category">
+    <% recipe.categories.each do |category| %>
+    <%# debugger %>
+    <%= link_to "#{category.name}", category_recipes_path(recipe.category_ids)%>
+    <% end %>
+    <br><br>
+    </li>
+<% end %>
+</ul>
+<%= link_to "Return to profile", user_path(@user)%><br>
+<%= link_to "Log Out", logout_path %>

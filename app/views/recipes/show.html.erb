@@ -1,0 +1,41 @@
+Recipe Name <h4><%= @recipe.name %></h4>
+Categories
+<% @recipe.categories.each do |category| %>
+<h4><%= category.name %></h4>
+<br>
+<% end %>
+Ingredients
+<% @recipe.ingredients.each do |ingredient| %>
+<h4><%= ingredient.name %>, <%= ingredient.calories %> calories</h4>
+<% end %>
+<%# iterate through all of the recipe's ratings and list them with user.email and user.rating.score %>
+<ul>
+Recipe's Ratings:
+<br><br>
+<% @recipe.ratings.each do |rating| %>
+    <li>
+    <h4><%= rating.user.email %> gave it a rating of: <%= rating.score %></h4>
+    </li>
+</ul>
+<% end %>
+
+<%= form_for @rating, url: "/recipes/#{@recipe.id}/ratings/new", method: :post, action: "create" do |f| %>
+<% invalid = @rating.errors.include?(:score) %>
+<div class="form-group">
+    <%= f.label "Rate this recipe (1-5)" %>
+    <%= f.text_field :score, class: "form-control #{'is-invalid' if invalid}" %>
+    <% if invalid %>
+    <div class="invalid-feedback d-block">
+        <% @rating.errors.full_messages_for(:score).each do |error_message| %>
+            <%= error_message %>
+        <% end %>
+    </div>
+    <% end %>
+</div>
+    <%= f.submit %>
+<% end %>
+<%# end %>
+<br>
+<%= link_to "Return to profile", user_path(@user)%>
+<br>
+<%= link_to "Log Out", logout_path %>

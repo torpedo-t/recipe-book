@@ -1,0 +1,7 @@
+Hello, <%= @user.email %>
+<br>
+<h5><%= link_to "Create New Recipe", new_user_recipe_path(@user) %></h5>
+<h5><%= link_to "View My Recipes", user_recipes_path(@user) %></h5>
+<h5><%= link_to "View All Recipes", recipes_path %></h5>
+<h5><%= link_to "View Most Recent Recipes", recent_recipes_path %></h5>
+<h5><%= link_to 'Log Out', '/logout', method: :get %></h5>

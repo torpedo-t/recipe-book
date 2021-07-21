@@ -1,0 +1,41 @@
+<%= form_for @user, url: "/users/new", method: :post do |f| %>
+    <% invalid = @user.errors.include?(:email) %>
+    <div class="form-group">
+        <%= f.label "Email:" %>
+        <%= f.text_field :email, class: "form-control #{'is-invalid' if invalid}" %>
+        <% if invalid %>
+        <div class="invalid-feedback d-block">
+            <% @user.errors.full_messages_for(:email).each do |error_message| %>
+                <%= error_message %>
+            <% end %>
+        </div>
+        <% end %>
+    </div>
+    <% invalid = @user.errors.include?(:password) %>
+    <div class="form-group">
+        <%= f.label "Password:" %>
+        <%= f.password_field :password, class: "form-control" %>
+        <% if invalid %>
+        <div class="invalid-feedback d-block">
+            <% @user.errors.full_messages_for(:password).each do |error_message| %>
+                <%= error_message %>
+            <% end %>
+        </div>
+        <% end %>
+    </div>
+    <% invalid = @user.errors.include?(:password_confirmation) %>
+    <div class="form-group">
+        <%= f.label "Password Confirmation:" %>
+        <%= f.password_field :password_confirmation, class: "form-control" %>
+        <% if invalid %>
+        <div class="invalid-feedback d-block">
+            <% @user.errors.full_messages_for(:password_confirmation).each do |error_message| %>
+                <%= error_message %>
+            <% end %>
+        </div>
+        <% end %>
+    </div>
+        <%= f.submit "Create User", class: "btn btn-primary" %> 
+    <% end %>
+    <p>Or</p>
+    <%= link_to "Log In Via Github", "/auth/github", method: :post %>

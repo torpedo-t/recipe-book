@@ -1,0 +1,5 @@
+Category.find_or_create_by(name: 'dessert')
+Category.find_or_create_by(name: 'lunch')
+Category.find_or_create_by(name: 'breakfast')
+Category.find_or_create_by(name: 'dinner')
+Category.find_or_create_by(name: 'picnic')

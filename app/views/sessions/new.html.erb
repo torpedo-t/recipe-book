@@ -1,0 +1,19 @@
+<%= form_for @user, url: "/signin", method: :post do |f| %>
+    <%= f.label "Email:" %>
+    <%= collection_select(:user, :email, User.all, :email, :email, prompt: "Please select your email from this dropdown") %>
+    <% invalid = @user.errors.include?(:password) %>
+    <div class="form-group">
+    <%= f.label "Password:" %>
+    <%= f.password_field :password, class: "form-control #{'is-invalid' if invalid}" %>
+    <% if invalid %>
+    <div class="invalid-feedback d-block">
+        <% @user.errors.full_messages_for(:password).each do |error_message| %>
+        <%= error_message %>
+        <% end %>
+    </div>
+    <% end %>
+    </div>
+    <%= f.submit "Sign In" %>
+ <% end %>
+ <br>
+ <%= link_to "Log In Via Github", "/auth/github", method: :post %>
