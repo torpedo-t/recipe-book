@@ -1,6 +1,8 @@
 <%= form_for @user, url: "/signin", method: :post do |f| %>
+    <div>
     <%= f.label "Email:" %>
     <%= collection_select(:user, :email, User.all, :email, :email, prompt: "Please select your email from this dropdown") %>
+    </div>
     <% invalid = @user.errors.include?(:password) %>
     <div class="form-group">
     <%= f.label "Password:" %>

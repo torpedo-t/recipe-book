@@ -19,6 +19,10 @@ class RecipesController < ApplicationController
             redirect_to user_recipes_path(@user)
         else
             # byebug
+            # @recipe.ingredients.build 
+            # @recipe.ingredients.build
+            # @recipe.ingredients.build
+            # @recipe.ingredients.build
             render "recipes/new"
         end
     end
@@ -26,19 +30,15 @@ class RecipesController < ApplicationController
     def index
         if params[:user_id] && user = User.find_by(id: params[:user_id])
             # byebug
-            # @recipes = User.find_by(id: params[:id]).recipes
             @recipes = user.recipes
         elsif params[:category_id] && @category = Category.find_by(id: params[:category_id])
             @recipes = @category.recipes
         else
-            # byebug
         @recipes = Recipe.all
-        # byebug
         end
     end
 
     def show 
-        # byebug
         if params[:category_id] && @category = Category.find_by(id: params[:category_id])
             @category
         end
