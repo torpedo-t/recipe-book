@@ -1,48 +1,21 @@
 <h3><%= @user.email %></h3>
+<%= render partial: "shared/errors", locals: { object: @recipe } %>
 <%= form_for @recipe, url: {action: "create"} do |f| %>
-    <% invalid = @recipe.errors.include?(:name) %>
-    <div class="form-group">
     <h4><%= f.label "Name:" %></h4>
-    <%= f.text_field :name, class: "form-control #{'is-invalid' if invalid}" %>
-    <% if invalid %>
-    <div class="invalid-feedback d-block">
-        <% @recipe.errors.full_messages_for(:name).each do |error_message| %>
-        <%= error_message %>
-        <% end %>
-    </div>
-    <% end %>
-    </div>
+    <%= f.text_field :name %>
+    <br>
     <h4><%= f.label "Select Category:" %><br></h4>
     <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
     <br>
     <h4><%= f.label "Ingredients:" %></h4>
     <%= f.fields_for :ingredients do |i| %>
-    <%# <% invalid = @recipe.errors.include?(:ingredients) %>
-    <%# <div class="form-group"> %>
         <%= i.label :name, "Name:" %>
-        <%= i.text_field :name %> <%#>, class: "form-control #{'is-invalid' if invalid}" %>
-        <%# if invalid %>
-        <%# <div class="invalid-feedback d-block"> %>
-            <%# <% @recipe.ingredients.errors.full_messages_for(:name).each do |error_message| %> 
-            <%# <%= error_message %> 
-            <%# <% end %> 
-        <%# </div> %>
-        <%# <% end %> 
-    <%# </div> %>
-    <%# <% invalid = @recipe.errors.include?(:ingredients) %>
-    <%# <div class="form-group"> %>
+        <%= i.text_field :name %>
         <%= i.label :calories, "Calories:" %>
-        <%= i.text_field :calories %> <%#%, class: "form-control #{'is-invalid' if invalid}" %>
-        <%# <% if invalid %> 
-        <%# <div class="invalid-feedback d-block"> %>
-            <%# <% @recipe.ingredients.errors.full_messages_for(:calories).each do |error_message| %> 
-            <%# <%= error_message %> 
-            <%# <% end %> 
-        <%# </div> %>
-        <%# <% end %> 
-    <%# </div> %>
+        <%= i.text_field :calories %>
+        <br> 
     <% end %>
-    <br><br>
+    <br>
     <%= f.submit %>
 <% end %>
 <br>
